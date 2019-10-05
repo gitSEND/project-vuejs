@@ -15,11 +15,22 @@ export default {
   name: "employee-form",
   data() {
     return {
+      submitting: false,
+      error: false,
+      success: false,
       employee: {
         name: "",
         email: ""
       }
     };
+  },
+  computed: {
+    invalidName() {
+      return this.employee.name === "";
+    },
+    invalidEmail() {
+      return this.employee.email === "";
+    }
   },
   methods: {
     handleSubmit() {
