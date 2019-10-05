@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="small-container">
     <h1>EMPLOYEES</h1>
-    <employee-form></employee-form>
+    <employee-form @add:objEmp="addEmployee" />
     <employee-table :arrEmployees="employees" />
   </div>
 </template>
@@ -31,6 +31,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    addEmployee(objEmp) {
+      this.employees = [...this.employees, objEmp];
+    }
   }
 };
 </script>
