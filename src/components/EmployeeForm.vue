@@ -18,6 +18,8 @@
         v-model="employee.email"
         @focus="clearStatus"
       />
+      <p v-if="error && submitting" class="error-message">Por favor debe completar el formulario</p>
+      <p v-if="success" class="success-message">Empleado registrado correctamente</p>
 
       <button>addEmployee</button>
     </form>
@@ -62,7 +64,8 @@ export default {
         email: ""
       };
       this.error = false;
-      this.success = false;
+      this.success = true;
+      this.submitting = false;
     },
     clearStatus() {
       this.success = false;
