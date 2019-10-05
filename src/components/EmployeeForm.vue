@@ -24,7 +24,7 @@ export default {
   methods: {
     handleSubmit() {
       //this.$emit('name-of-envent',data)
-      this.$emit("add:employee", this.employee);
+      this.$emit("add:objEmp", this.employee);
     }
   }
 };

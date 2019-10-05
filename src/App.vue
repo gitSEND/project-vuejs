@@ -34,7 +34,12 @@ export default {
   },
   methods: {
     addEmployee(objEmp) {
-      this.employees = [...this.employees, objEmp];
+      const lastId = this.employees.length
+        ? this.employees[this.employees - 1].id
+        : 0;
+      const id = lastId + 1;
+      const newObjEmp = { ...objEmp, id };
+      this.employees = [...this.employees, newObjEmp];
     }
   }
 };
