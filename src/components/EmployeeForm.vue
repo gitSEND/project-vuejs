@@ -2,9 +2,23 @@
   <div id="employee-form">
     <form @submit.prevent="handleSubmit">
       <label for="name">Ingrese su nombre</label>
-      <input v-model="employee.name" type="text" />
+      <input
+        ref="first"
+        v-model="employee.name"
+        :class="{'hass-error':submitting && invalidName}"
+        @focus="clearStatus"
+        @keypress="clearStatus"
+        type="text"
+      />
+
       <label for="correo">Ingrese su correo</label>
-      <input v-model="employee.email" type="text" />
+      <input
+        type="text"
+        :class="{ 'has-error': submitting && invalidEmail }"
+        v-model="employee.email"
+        @focus="clearStatus"
+      />
+
       <button>addEmployee</button>
     </form>
   </div>
@@ -35,17 +49,20 @@ export default {
   methods: {
     handleSubmit() {
       this.submitting = true;
-      clearStatus();
+      this.clearStatus();
       if (this.invalidName || this.invalidEmail) {
         this.error = true;
         return;
       }
       //this.$emit('name-of-envent',data)
       this.$emit("add:objEmp", this.employee);
+      this.$refs.first.focus();
       this.employee = {
         name: "",
         email: ""
       };
+      this.error = false;
+      this.success = false;
     },
     clearStatus() {
       this.success = false;
@@ -58,5 +75,14 @@ export default {
 <style scoped>
 form {
   margin-bottom: 128px;
+}
+[class*="-message"] {
+  font-weight: 500;
+}
+.error-message {
+  color: rgb(145, 20, 20);
+}
+.success-message {
+  color: rgb(58, 161, 58);
 }
 </style>
