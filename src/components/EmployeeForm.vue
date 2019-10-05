@@ -34,8 +34,22 @@ export default {
   },
   methods: {
     handleSubmit() {
+      this.submitting = true;
+      clearStatus();
+      if (this.invalidName || this.invalidEmail) {
+        this.error = true;
+        return;
+      }
       //this.$emit('name-of-envent',data)
       this.$emit("add:objEmp", this.employee);
+      this.employee = {
+        name: "",
+        email: ""
+      };
+    },
+    clearStatus() {
+      this.success = false;
+      this.error = false;
     }
   }
 };
